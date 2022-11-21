@@ -1,23 +1,20 @@
-import logo from './logo.svg';
+
 import './App.css';
+import { Video } from './components/Video';
+import { VideoControls } from './components/VideoControls';
+import { useVideo } from './hooks/useVideo';
 
 function App() {
+  const { videoRef, isPlaying, currentTime } = useVideo()
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Video videoRef={videoRef} />
+      <VideoControls 
+        videoRef={videoRef} 
+        isPlaying={isPlaying} 
+        currentTime={currentTime}
+      />
     </div>
   );
 }

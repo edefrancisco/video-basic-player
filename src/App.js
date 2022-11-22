@@ -1,22 +1,10 @@
+import './App.css'
+import { VideoStandard } from './components/VideoStandard'
 
-import './App.css';
-import { Video } from './components/Video';
-import { VideoControls } from './components/VideoControls';
-import { useVideo } from './hooks/useVideo';
-
-function App() {
-  const { videoRef, isPlaying, currentTime } = useVideo()
-
+export default function App() {
   return (
     <div className="App">
-      <Video videoRef={videoRef} />
-      <VideoControls 
-        videoRef={videoRef} 
-        isPlaying={isPlaying} 
-        currentTime={currentTime}
-      />
+      <VideoStandard />
     </div>
-  );
+  )
 }
-
-export default App;

@@ -1,18 +1,10 @@
 // @ts-check
 
-import React from "react";
-import { useEffect, useRef } from "react";
+import React from "react"
 
 export function Video({ videoRef }) {
-  /** @type {React.RefObject<HTMLDivElement>} */
-  const videoContinerRef = useRef(null);
-
-  useEffect(() => {
-    if (videoRef.current) videoRef.current.play()
-  }, [videoRef]);
-
   return (
-    <div ref={videoContinerRef}>
+    <div>
       <video
         ref={videoRef}
         width="100%" 

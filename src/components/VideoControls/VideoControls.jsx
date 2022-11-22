@@ -1,6 +1,19 @@
 // @ts-check
 
-import React from "react";
+import React from "react"
+import { 
+  IoStopOutline, 
+  IoPlayOutline, 
+  IoPauseOutline, 
+  IoPlayForwardOutline, 
+  IoPlayBackOutline,
+  IoVolumeOffOutline,
+  IoVolumeMuteOutline,
+  IoVolumeHighOutline,
+  IoVolumeLowOutline
+} from "react-icons/io5";
+import { AiOutlineFullscreen } from "react-icons/ai";
+import styles from './VideoControls.module.css'
 
 /** 
  * @param {Number} secs 
@@ -97,48 +110,62 @@ export function VideoControls({ videoRef, isPlaying, currentTime }) {
 
   return (
     <div>
-      <h1>Video Controls</h1>
-      <ul>
-        <li>
-          { 
-            isPlaying 
-              ? <button onClick={handlePause}>Pause</button>
-              : <button onClick={handlePlay}>Play</button>
-          }
-          
-        </li>
-        <li>
-          <button onClick={handleStop}>Stop</button>
-        </li>
-        <li>
-          <button onClick={handleFastForward}>FF {'>>'}</button>
-        </li>
-        <li>
-          <button onClick={handleRewind}>{'<<'} RW</button>
-        </li>
-        <li>
-          <progress value={currentTime} max={duration} onClick={handleProgress} />
-        </li>
-        <li>
-          {
-            isMuted
-              ? <button onClick={handleMuteToggle}>UnMute</button>
-              : <button onClick={handleMuteToggle}>Mute</button>
-          }
-        </li>
-        <li>
-          <button onClick={handleVolumeUp}>Vol+</button>
-        </li>
-        <li>
-          <button onClick={handleVolumeDown}>Vol-</button>
-        </li>
-        <li>
-          <button onClick={handleFullScreen}>Fullscreen</button>
-        </li>
-        <li>
-          <span>{formatTime(currentTime)} / {formatTime(duration)}</span>
-        </li>
-      </ul>
+
+      <div className={styles.progressContainer}>
+        <progress 
+          value={currentTime} 
+          max={duration} 
+          onClick={handleProgress} 
+          className={styles.progress}
+        />
+        <span className={styles.time}>
+          {formatTime(currentTime)} / {formatTime(duration)}
+        </span>
+      </div>
+      
+      <div className={styles.controls}>
+
+        <div>
+          <button onClick={handleRewind} className={styles.playerButton}>
+            <IoPlayBackOutline size={'2rem'} />
+          </button>
+            {
+              isPlaying 
+                ? <button onClick={handlePause} className={styles.playerButton}>
+                    <IoPauseOutline size={'2rem'} />
+                  </button>
+                : <button onClick={handlePlay} className={styles.playerButton}>
+                    <IoPlayOutline size={'2rem'} />
+                  </button>
+            }
+          <button onClick={handleStop} className={styles.playerButton}>
+            <IoStopOutline size={'2rem'} />
+          </button>
+          <button onClick={handleFastForward} className={styles.playerButton}>
+            <IoPlayForwardOutline size={'2rem'} />
+          </button>
+        </div>
+
+        <div>
+          <button onClick={handleFullScreen} className={styles.playerButton}>
+            <AiOutlineFullscreen size={'2rem'} />
+          </button>
+          <button onClick={handleMuteToggle} className={styles.playerButton}>
+            {
+              isMuted 
+                ? <IoVolumeMuteOutline size={'2rem'} />
+                : <IoVolumeOffOutline size={'2rem'} />
+            }
+          </button>
+          <button onClick={handleVolumeDown} className={styles.playerButton}>
+            <IoVolumeLowOutline size={'2rem'} />
+          </button>
+          <button onClick={handleVolumeUp} className={styles.playerButton}>
+            <IoVolumeHighOutline size={'2rem'} />
+          </button>
+        </div>
+
+      </div>
     </div>
-  );
+  )
 }

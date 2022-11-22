@@ -12,19 +12,15 @@ export function useVideo() {
     const secureVideoRef = videoRef.current
     if (secureVideoRef) {
       secureVideoRef.addEventListener("play", () => {
-        // console.log("play")
         setIsPlaying(true)
       })
       secureVideoRef.addEventListener("pause", () => {
-        // console.log("pause")
         setIsPlaying(false)
       })
       secureVideoRef.addEventListener("ended", () => {
-        // console.log("ended")
         setIsPlaying(false)
       })
       secureVideoRef.addEventListener("timeupdate", () => {
-        // console.log("timeupdate")
         setCurrentTime(secureVideoRef.currentTime)
       })
     }

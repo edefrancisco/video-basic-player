@@ -9,6 +9,8 @@ import videojs from "video.js"
  */
 
 export function useVideoJs() {
+  /** @type {React.MutableRefObject<HTMLDivElement | null>} */
+  const videoRef = useRef(null)
   
   /** @type {React.MutableRefObject<VideoJsPlayer | null>} */
   const playerRef = useRef(null)
@@ -42,5 +44,7 @@ export function useVideoJs() {
   return { 
     videoJsOptions, 
     handlePlayerReady,
+    playerRef,
+    videoRef
   }
 }

@@ -12,15 +12,11 @@ import 'video.js/dist/video-js.css'
 /**
  * @param {object} obj 
  * @param {VideoJsPlayerOptions} obj.options
- * @param {(player: VideoJsPlayer) => void } obj.onReady
+ * @param {(player: VideoJsPlayer) => void} obj.onReady
+ * @param {React.MutableRefObject<HTMLDivElement | null>} obj.videoRef
+ * @param {React.MutableRefObject<VideoJsPlayer | null>} obj.playerRef
  */
-export const VideoJs = ({options, onReady}) => {
-
-  /** @type {React.MutableRefObject<HTMLDivElement | null>} */
-  const videoRef = React.useRef(null)
-  
-  /** @type {React.MutableRefObject<VideoJsPlayer | null>} */
-  const playerRef = React.useRef(null)
+export const VideoJs = ({options, onReady, videoRef, playerRef}) => {
 
   React.useEffect(() => {
     // Make sure Video.js player is only initialized once
@@ -45,7 +41,7 @@ export const VideoJs = ({options, onReady}) => {
         player.src(options.sources || [])
       }
     }
-  }, [options, videoRef, onReady])
+  }, [options, videoRef, onReady, playerRef])
 
 
   // Dispose the Video.js player when the functional component unmounts
